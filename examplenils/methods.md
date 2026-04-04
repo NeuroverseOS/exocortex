@@ -18,6 +18,8 @@ Only after this NASA loop can you really sell whatever it is you're selling. In 
 
 The listeners need was getting home earlier. The solution would be a tool that saves them time. What I actually sold them in the end was bookkeeping software.
 
+This is also a good way to structure any blog post or any media really: make sure you structure the information so that the reader always has the necessary scaffolding in RAM. Don't assume!
+
 ###LEIA
 
 Whenever you evaluate a UI design, especially collaboratively, it can be hard to reason about if you've made improvements or not. I designed this heuristic to help:
