@@ -1,149 +1,156 @@
 #!/bin/bash
 
 # Exocortex Setup
-# Run this once after cloning to make it yours.
+# Walks you through personalizing your exocortex template files.
 
 set -e
 
 echo ""
-echo "Welcome to your exocortex."
-echo "Let's set it up. This takes about 5 minutes."
+echo "=== Exocortex Setup ==="
+echo ""
+echo "This will walk you through personalizing your exocortex."
+echo "Each file has guiding prompts inside — this script helps you"
+echo "get started by filling in the basics. You can always edit the"
+echo "files directly afterward."
 echo ""
 
-# --- Name ---
-read -p "What do you want to call your exocortex? (default: exocortex) " NAME
-NAME="${NAME:-exocortex}"
-
-# --- Values ---
+# --- identity.md ---
+echo "--- Identity ---"
 echo ""
-echo "Let's start with your values — the principles that guide your decisions."
-echo "These aren't aspirational. They're descriptive. What do you actually optimize for?"
-echo ""
+read -r -p "What is your name? " name
+read -r -p "What do you do? (e.g. 'engineer at Acme Corp') " role_desc
+read -r -p "What lens or discipline shapes your thinking? (e.g. engineering, design, biology) " lens
 
-VALUES=""
-VALUE_NUM=0
-while true; do
-  read -p "Enter a value (or press Enter when done): " VALUE_NAME
-  [ -z "$VALUE_NAME" ] && [ $VALUE_NUM -gt 0 ] && break
-  [ -z "$VALUE_NAME" ] && echo "You need at least one value." && continue
-  VALUE_NUM=$((VALUE_NUM + 1))
-  echo ""
-  echo "What does \"$VALUE_NAME\" mean to you? (Press Enter twice when done)"
-  VALUE_DESC=""
-  while IFS= read -r line; do
-    [ -z "$line" ] && break
-    VALUE_DESC="${VALUE_DESC}${line}\n"
-  done
-  VALUES="${VALUES}### ${VALUE_NAME}\n\n${VALUE_DESC}\n"
-done
+cat > identity.md << EOF
+Who are you? Write a short description of yourself — your name, what you do, and how you see the world.
 
-# --- Green day criteria ---
-echo ""
-echo "Now let's define what a 'green day' looks like for you."
-echo "A green day means you showed up. Red means you didn't. No partial credit."
+What lens or discipline shapes your thinking? (e.g. engineering, design, biology, economics, memetics)
+
+If you have a public bio, paste it here.
+
+##Identity
+
+I am ${name}, ${role_desc}. I see the world through the lens of ${lens}.
+EOF
+
+echo "  ✓ identity.md updated"
 echo ""
 
-CRITERIA=""
-CRIT_NUM=0
-while true; do
-  read -p "Enter a green day criterion (or press Enter when done): " CRITERION
-  [ -z "$CRITERION" ] && [ $CRIT_NUM -gt 0 ] && break
-  [ -z "$CRITERION" ] && echo "You need at least one criterion." && continue
-  CRIT_NUM=$((CRIT_NUM + 1))
-  CRITERIA="${CRITERIA}- [ ] ${CRITERION}\n"
-done
-
-# --- Goals ---
+# --- values.md ---
+echo "--- Values ---"
 echo ""
-echo "What daily habits do you want to track? These reset every day."
-echo ""
+read -r -p "What is your most important guiding value? " value1
+read -r -p "Why does it matter to you? " value1_why
 
-DAILY_GOALS=""
-while true; do
-  read -p "Enter a daily habit (or press Enter when done): " GOAL
-  [ -z "$GOAL" ] && break
-  DAILY_GOALS="${DAILY_GOALS}| ${GOAL} | 0% | |\n"
-done
+cat > values.md << EOF
+What are your guiding values? List each one and explain what it means to you personally — not the dictionary definition, but why it matters and how it shows up in your decisions.
 
-echo ""
-echo "What long-term goals are you working toward?"
+### ${value1}
+
+${value1_why}
+EOF
+
+echo "  ✓ values.md updated"
 echo ""
 
-LONG_GOALS=""
-while true; do
-  read -p "Enter a long-term goal (or press Enter when done): " GOAL
-  [ -z "$GOAL" ] && break
-  LONG_GOALS="${LONG_GOALS}| ${GOAL} | 0% | |\n"
-done
-
-# --- Attention ---
+# --- organization.md ---
+echo "--- Organization ---"
 echo ""
-echo "Finally — what are you focused on RIGHT NOW?"
-echo "One thing. The constraint is the point."
+read -r -p "What is your organization's name? " org_name
+read -r -p "What is your organization's mission? " org_mission
+
+cat > organization.md << EOF
+# Welcome to ${org_name}
+
+What is the mission of your organization? What are you collectively trying to accomplish?
+
+${org_mission}
+
+What are you building, and why does it matter?
+
+What context about the world or your industry is important for understanding why this work is valuable?
+
+
+# Our Values
+
+What values guide how your organization operates? List them and explain what each one means in practice — not just as slogans, but as behaviors you expect to see.
+
+## Value 1
+
+What does this look like in practice? What behaviors does it encourage or discourage?
+
+## Value 2
+
+What does this look like in practice? What behaviors does it encourage or discourage?
+EOF
+
+echo "  ✓ organization.md updated"
 echo ""
-read -p "> " ATTENTION
 
-# --- Write files ---
+# --- role.md ---
+echo "--- Role ---"
+echo ""
+read -r -p "What is your role/title? " role_title
 
-# values.md
-printf "%b" "$VALUES" > values.md
+cat > role.md << EOF
+What is your role? State your title and what your organization does, so your role has context.
 
-# accountability.md
-cat > accountability.md << 'HEADER'
-## Green day criteria
+I am ${role_title} at ${org_name}.
 
-All must be true for a green day:
+As ${role_title}, you have responsibilities and routines. Responsibilities are overarching, while routines are methods you use to execute your responsibilities.
 
-HEADER
-printf "%b" "$CRITERIA" >> accountability.md
-cat >> accountability.md << 'FOOTER'
+## Responsibilities
 
-## Calendar
+What are the core responsibilities of your role? For each one, describe what it means and why it matters.
 
-Current streak: 0 days
-Longest green streak: 0 days
+## Routines
 
-| Date | Status |
-|------|--------|
-FOOTER
+What are the recurring activities you perform to fulfill your responsibilities? Be specific — include cadences, times, and what good execution looks like.
+EOF
 
-# goals.md
-cat > goals.md << 'HEADER'
+echo "  ✓ role.md updated"
+echo ""
+
+# --- goals.md ---
+echo "--- Goals ---"
+echo ""
+read -r -p "What is your current main goal or project? " goal1
+
+cat > goals.md << EOF
 # Goals
 
-## Daily habits
+**${goal1}**
+EOF
 
-Things that reset every day. Progress is today's progress.
-
-| Goal | Progress | Last updated |
-| ---- | -------- | ------------ |
-HEADER
-printf "%b" "$DAILY_GOALS" >> goals.md
-cat >> goals.md << 'HEADER'
-
-## Long-term goals
-
-Things that accumulate over time.
-
-| Goal | Progress | Last updated |
-| ---- | -------- | ------------ |
-HEADER
-printf "%b" "$LONG_GOALS" >> goals.md
-
-# attention.md
-echo "$ATTENTION" > attention.md
-
-# --- Clean up and reinitialize ---
-rm -rf .git
-git init
-git add .
-git commit -m "Initialize ${NAME}"
-
+echo "  ✓ goals.md updated"
 echo ""
-echo "Done. Your exocortex '${NAME}' is ready."
+
+# --- attention.md ---
+echo "--- Attention ---"
 echo ""
-echo "Next steps:"
-echo "  1. Create a repo on GitHub and push this up"
-echo "  2. Open a conversation with your AI agent in this directory"
-echo "  3. Start working — it'll read your exocortex and keep you on track"
+read -r -p "What is your focus right now? (one thing) " focus
+
+cat > attention.md << EOF
+${focus}
+EOF
+
+echo "  ✓ attention.md updated"
+echo ""
+
+# --- Done ---
+echo "=== Setup complete ==="
+echo ""
+echo "Your exocortex is ready. Here's what to do next:"
+echo ""
+echo "  1. Review and expand each file — the guiding prompts will help"
+echo "  2. Check out examplenils/ for a filled-in example"
+echo "  3. Push to your own repo and start working with your AI agent"
+echo ""
+echo "Files you should flesh out:"
+echo "  - identity.md    Add your bio and worldview"
+echo "  - values.md      Add more values"
+echo "  - organization.md Fill in your org's values"
+echo "  - role.md        Add responsibilities and routines"
+echo "  - methods.md     Add your mental models and frameworks"
+echo "  - glossary.md    Add domain-specific terms"
 echo ""

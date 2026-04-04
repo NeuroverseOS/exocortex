@@ -1,18 +1,5 @@
-<!-- 
-  What do you care about? What principles guide your decisions?
-  
-  Write each value as a short heading, then explain what it means 
-  to you in your own words. These aren't aspirational — they're 
-  descriptive. What do you actually optimize for?
-  
-  Your AI agent will check that your goals don't conflict with 
-  your values.
--->
+What are your guiding values? List each one and explain what it means to you personally — not the dictionary definition, but why it matters and how it shows up in your decisions.
 
-### Value 1
+### Pull your weight.
 
-What does this mean to you?
-
-### Value 2
-
-What does this mean to you?
+I want to produce more than I consume. I want to be a positive sum process to civilization and my friends and family.

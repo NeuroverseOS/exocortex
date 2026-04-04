@@ -36,3 +36,27 @@ Any change you make to a UI will affect it in at least one of four dimensions:
 
 
 Whenever you make any change to design, you created delta on at least one of these. This can help you reason about if the change was good or not - because your design could have different LEIA goals.
+
+###Why, How, What
+
+To make a story compelling, full a why, how, what structure:
+
+**Why** — Your purpose or belief. Why do you exist?
+*"We love music."*
+
+**How** — The approach that brings your why to life.
+*"So we want to put music in your pocket."*
+
+**What** — Your product, service, or action.
+*"The iPod — here are its features and price."*
+
+**The rule:** People don't buy what you do — they buy why you do it. Lead with why. Let what follow as proof.
+
+**Bad example:** Today we are introducing the Zune, a music player for $399. We think it will revolutionize how you consume music.
+
+**Good example:** We love music. We wish you could bring music with you wherever you go. So we decided we want to put a music player in your pocket. But such a music player would have to hold a lot of music, it would have to be robust and reliable... and so today we are introducing the iPod. It holds 1000 songs in your pocket, has 20 minutes of shake memory, several hours of battery - and it only costs $399.
+
+Notice the similarities to the Need, Acceptance, Solution, Acceptance structure.
+
+Need: Why - we love music and wish we could listen to it all the time
+Solution: How - imagine if we could put 1000 songs in our pocket and listen as we move around the world
