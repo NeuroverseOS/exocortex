@@ -26,9 +26,4 @@ When we get this right, our intercognitive bandwidth increases: our ability to t
 
 The `src/` directory contains the exocortex template — the set of files that any Auki employee can clone to set up their own exocortex. See [src/README.md](src/README.md) for setup instructions.
 
-## Roadmap
-
-- Exocortex accessible via WhatsApp/Telegram — so your AI partner can reach you outside of the IDE
-- Project-level exocortices for every active project at Auki
-- Cross-exocortex alignment — the CEO's exocortex references team role files, team members reference the org context
-- Structured audit process — regularly review whether exocortices are being used and making us more productive
+See [roadmap.md](roadmap.md) for the project roadmap and [sprint.md](sprint.md) for the current week's focus.
