@@ -5,8 +5,9 @@
 
 set -e
 
-ORG_REPO="$(cd "$(dirname "$0")/.." && pwd)"
-TEMPLATE_DIR="$ORG_REPO/src"
+TEMPLATE_REPO="$(cd "$(dirname "$0")/.." && pwd)"
+TEMPLATE_DIR="$TEMPLATE_REPO/src"
+ORG_REPO="$TEMPLATE_REPO/../org"
 
 echo ""
 echo "=== Exocortex Setup ==="
@@ -45,17 +46,29 @@ mkdir -p "$exo_path"
 echo "  ✓ Directory ready at $exo_path"
 echo ""
 
-# --- Org symlink ---
-ln -sf "$ORG_REPO" "$exo_path/org"
-echo "  ✓ org/ symlinked to $ORG_REPO"
+# --- Find the org repo ---
+echo "--- Organization ---"
 echo ""
 
-# --- Read org name ---
+if [ ! -d "$ORG_REPO/src" ]; then
+  echo "  Could not find the org repo at $ORG_REPO."
+  echo "  The org repo should be a sibling directory named 'org'."
+  read -r -p "  Path to org repo (or leave blank to skip): " custom_org
+  if [ -n "$custom_org" ]; then
+    custom_org="${custom_org/#\~/$HOME}"
+    ORG_REPO="$custom_org"
+  fi
+fi
+
 org_file="$ORG_REPO/src/organization.md"
 if [ -f "$org_file" ]; then
+  ORG_REPO="$(cd "$ORG_REPO" && pwd)"
   org_name=$(head -1 "$org_file" | sed 's/^# Welcome to //' | sed 's/!$//')
+  ln -sf "$ORG_REPO" "$exo_path/org"
+  echo "  ✓ org/ symlinked to $ORG_REPO"
+  echo "  Organization: $org_name"
 else
-  echo "  (No organization.md found in org repo — asking you directly.)"
+  echo "  ⚠ No organization.md found. Skipping org symlink."
   read -r -p "  What is your organization's name? " org_name
 fi
 echo ""

@@ -33,8 +33,8 @@ Organization-level context (mission, strategy, values, team role files, shared h
 ## How setup.sh works
 
 1. Asks where you want your personal exocortex to live (e.g. `~/exocortex`)
-2. Creates that directory and symlinks `org/` back to this repo
-3. Reads the org name from `organization.md`
+2. Creates that directory and symlinks `org/` to the org repo (sibling directory)
+3. Reads the org name from `org/src/organization.md`
 4. Prompts for name, role, values, goals, and initial attention focus
 5. Writes personalized files into the new directory
 6. Copies template files (methods.md, glossary.md, etc.) that you fill in over time
@@ -46,4 +46,5 @@ The setup script never writes to this org repo — your personal files stay in y
 
 - Git
 - Bash (for setup.sh)
+- A local clone of the [org](https://github.com/aukilabs/org) repo as a sibling directory (e.g. `aukilabs/org` next to `aukilabs/exocortex`)
 - An AI coding tool that reads CLAUDE.md (Claude Code, Cursor, etc.)
