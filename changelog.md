@@ -1,3 +1,8 @@
+**Timestamp**: Apr 5 HKT, 2026
+**Change**: Populated organization.md with full Auki context — mission, protocol (Domains, four questions), economy (credits, $AUKI, staking), products, perception-first strategy, and values. Repo moved from Broodsugar/exocortex to aukilabs/exocortex.
+**Justification**: Any Auki employee cloning the exocortex now gets pre-loaded organizational context. Repo is now under the official Auki GitHub org.
+**PromptID**: 5
+
 **Timestamp**: Apr 4 HKT, 2026
 **Change**: Synced contributing.md with cortex version — added rule about respecting changelog conventions of loaded repos.
 **Justification**: Rule was added to cortex/contributing.md after Claude edited exocortex files without logging there. Template should match.
