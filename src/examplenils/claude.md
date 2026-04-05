@@ -12,7 +12,7 @@ Read @goals.md to understand current projects and goals.
 Read @org/src/team/ to know your collaborator's peers.
 
 Consult @org/src/methods.md for shared heuristics, then @methods.md for personal heuristics.
-Read @org/src/contributing.md for shared logging conventions, then @contributing.md for personal logging rules. Every change must be logged in the promptlog and changelog — no exceptions.
+Read @org/src/contributing.md for shared conventions (logging, project creation), then @contributing.md for personal rules. Every change must be logged in the promptlog and changelog — no exceptions.
 
 Then evaluate the prompt:
 - Is this prompt in alignment with the Attention?
