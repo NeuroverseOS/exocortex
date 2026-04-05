@@ -24,6 +24,7 @@ Project repos are symlinked into the exocortex root. Each project follows a stan
 | roadmap.md | Where it's headed — milestones, dependencies, timeline |
 | glossary.md | Project-specific vocabulary |
 | changelog.md | What changed and why (Author field, not PromptID) |
+| parking_lot.md | Open questions that need human input |
 | src/ | The actual code |
 | src/readme.md | AI-generated description of what the code does today (no fluff) |
 | src/sprint.md | Current work and next steps |
