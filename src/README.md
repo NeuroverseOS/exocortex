@@ -32,14 +32,18 @@ Organization-level context (mission, strategy, values, team role files, shared h
 
 ## How setup.sh works
 
-1. Asks for the path to your local org repo clone and creates the `org/` symlink
-2. Prompts for name, role, values, goals, and initial attention focus
-3. Writes answers into the template files (identity.md, role.md, goals.md, attention.md)
-4. User opens the repo in Claude Code or Cursor and starts working
+1. Asks where you want your personal exocortex to live (e.g. `~/exocortex`)
+2. Creates that directory and symlinks `org/` back to this repo
+3. Reads the org name from `organization.md`
+4. Prompts for name, role, values, goals, and initial attention focus
+5. Writes personalized files into the new directory
+6. Copies template files (methods.md, glossary.md, etc.) that you fill in over time
+7. Optionally initializes a git repo so you can track your own changes
+
+The setup script never writes to this org repo — your personal files stay in your personal exocortex.
 
 ## Dependencies
 
 - Git
 - Bash (for setup.sh)
-- A local clone of the org repo
 - An AI coding tool that reads CLAUDE.md (Claude Code, Cursor, etc.)

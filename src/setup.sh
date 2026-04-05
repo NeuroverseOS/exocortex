@@ -1,51 +1,76 @@
 #!/bin/bash
 
 # Exocortex Setup
-# Walks you through personalizing your exocortex template files.
+# Waslks you t hrough creating a personal exocortex from the org template.
 
 set -e
+
+ORG_REPO="$(cd "$(dirname "$0")/.." && pwd)"
+TEMPLATE_DIR="$ORG_REPO/src"
 
 echo ""
 echo "=== Exocortex Setup ==="
 echo ""
-echo "This will walk you through personalizing your exocortex."
-echo "Each file has guiding prompts inside — this script helps you"
-echo "get started by filling in the basics. You can always edit the"
-echo "files directly afterward."
+echo "This will create your personal exocortex — a new directory"
+echo "with your identity, role, goals, and focus. It symlinks back"
+echo "to this org repo for shared context."
 echo ""
 
-# --- Org repo symlink ---
-echo "--- Organization ---"
+# --- Where to create the personal exocortex ---
+echo "--- Location ---"
 echo ""
-echo "Your exocortex reads shared org context (mission, values, team)"
-echo "through a symlink to the org repo. You need a local clone of the"
-echo "org repo to continue."
+echo "Choose a parent directory. Your exocortex will be created"
+echo "as an 'exocortex' folder inside it."
 echo ""
-read -r -p "Path to your local org repo clone (e.g. ~/aukilabs-org): " org_path
+read -r -p "Parent directory (e.g. ~): " parent_path
 
-# Expand ~ if present
-org_path="${org_path/#\~/$HOME}"
+parent_path="${parent_path/#\~/$HOME}"
+parent_path="${parent_path%/}"
+exo_path="$parent_path/exocortex"
 
-if [ ! -d "$org_path/src" ]; then
-  echo "  ✗ Could not find src/ in $org_path. Make sure the org repo is cloned there."
-  exit 1
+echo ""
+echo "  → Will create: $exo_path"
+
+if [ -f "$exo_path/identity.md" ]; then
+  echo ""
+  echo "  ⚠ An exocortex already exists at $exo_path."
+  read -r -p "  Re-run setup and replace its files? (y/N) " confirm
+  if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    echo "  Aborting."
+    exit 1
+  fi
 fi
 
-ln -sf "$org_path" org
-echo "  ✓ org/ symlinked to $org_path"
+mkdir -p "$exo_path"
+echo "  ✓ Directory ready at $exo_path"
 echo ""
 
-# --- identity.md ---
+# --- Org symlink ---
+ln -sf "$ORG_REPO" "$exo_path/org"
+echo "  ✓ org/ symlinked to $ORG_REPO"
+echo ""
+
+# --- Read org name ---
+org_file="$ORG_REPO/src/organization.md"
+if [ -f "$org_file" ]; then
+  org_name=$(head -1 "$org_file" | sed 's/^# Welcome to //' | sed 's/!$//')
+else
+  echo "  (No organization.md found in org repo — asking you directly.)"
+  read -r -p "  What is your organization's name? " org_name
+fi
+echo ""
+
+# --- Identity ---
 echo "--- Identity ---"
 echo ""
 read -r -p "What is your name? " name
-read -r -p "What do you do? (e.g. 'engineer at Acme Corp') " role_desc
+read -r -p "What do you do? (e.g. 'engineer at $org_name') " role_desc
 read -r -p "What lens or discipline shapes your thinking? (e.g. engineering, design, biology) " lens
 echo ""
 read -r -p "What is your most important guiding value? " value1
 read -r -p "Why does it matter to you? " value1_why
 
-cat > identity.md << EOF
+cat > "$exo_path/identity.md" << EOF
 Who are you? Write a short description of yourself — your name, what you do, and how you see the world.
 
 What lens or discipline shapes your thinking? (e.g. engineering, design, biology, economics, memetics)
@@ -67,18 +92,16 @@ I am ${name}, ${role_desc}. I see the world through the lens of ${lens}.
 ${value1_why}
 EOF
 
-echo "  ✓ identity.md updated"
+echo "  ✓ identity.md created"
 echo ""
 
-# --- role.md ---
+# --- Role ---
 echo "--- Role ---"
 echo ""
-# Read org name from the org repo
-org_name=$(head -1 "$org_path/src/organization.md" | sed 's/^# Welcome to //' | sed 's/!$//')
 echo "  Organization: $org_name"
 read -r -p "What is your role/title? " role_title
 
-cat > role.md << EOF
+cat > "$exo_path/role.md" << EOF
 What is your role? State your title and what your organization does, so your role has context.
 
 I am ${role_title} at ${org_name}.
@@ -94,51 +117,75 @@ What are the core responsibilities of your role? For each one, describe what it 
 What are the recurring activities you perform to fulfill your responsibilities? Be specific — include cadences, times, and what good execution looks like.
 EOF
 
-echo "  ✓ role.md updated"
+echo "  ✓ role.md created"
 echo ""
 
-# --- goals.md ---
+# --- Goals ---
 echo "--- Goals ---"
 echo ""
 read -r -p "What is your current main goal or project? " goal1
 
-cat > goals.md << EOF
+cat > "$exo_path/goals.md" << EOF
 # Goals
 
 **${goal1}**
 EOF
 
-echo "  ✓ goals.md updated"
+echo "  ✓ goals.md created"
 echo ""
 
-# --- attention.md ---
+# --- Attention ---
 echo "--- Attention ---"
 echo ""
 read -r -p "What is your focus right now? (one thing) " focus
 
-cat > attention.md << EOF
+cat > "$exo_path/attention.md" << EOF
 ${focus}
 EOF
 
-echo "  ✓ attention.md updated"
+echo "  ✓ attention.md created"
+echo ""
+
+# --- Copy template files that don't need personalization ---
+echo "--- Copying templates ---"
+echo ""
+
+for file in CLAUDE.md methods.md glossary.md contributing.md changelog.md promptlog.md; do
+  if [ -f "$TEMPLATE_DIR/$file" ]; then
+    cp "$TEMPLATE_DIR/$file" "$exo_path/$file"
+    echo "  ✓ $file"
+  fi
+done
+echo ""
+
+# --- Init git ---
+if [ ! -d "$exo_path/.git" ]; then
+  read -r -p "Initialize a git repo in your exocortex? (Y/n) " init_git
+  if [[ ! "$init_git" =~ ^[Nn]$ ]]; then
+    git init "$exo_path" > /dev/null 2>&1
+    echo "  ✓ Git repo initialized"
+  fi
+fi
 echo ""
 
 # --- Done ---
 echo "=== Setup complete ==="
 echo ""
-echo "Your exocortex is ready. Here's what to do next:"
+echo "Your exocortex is at: $exo_path"
 echo ""
-echo "  1. Review and expand each file — the guiding prompts will help"
-echo "  2. Check out examplenils/ for a filled-in example"
-echo "  3. Push to your own repo and start working with your AI agent"
+echo "Next steps:"
 echo ""
-echo "Files you should flesh out:"
+echo "  1. cd $exo_path"
+echo "  2. Open it in your AI coding tool (Cursor, Claude Code, etc.)"
+echo "  3. Review and expand each file — the guiding prompts will help"
+echo ""
+echo "Files to flesh out:"
 echo "  - identity.md    Add your bio, worldview, and more values"
 echo "  - role.md        Add responsibilities and routines"
 echo "  - methods.md     Add your mental models and frameworks"
 echo "  - glossary.md    Add domain-specific terms"
 echo ""
-echo "Shared context (read-only, from org repo):"
+echo "Shared context (read-only, via org/ symlink):"
 echo "  - org/src/organization.md   Mission, strategy, values"
 echo "  - org/src/team/             Your colleagues' role files"
 echo "  - org/src/methods.md        Shared heuristics"
