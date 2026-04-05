@@ -14,6 +14,22 @@ Read @org/src/team/ to know your collaborator's peers.
 Consult @org/src/methods.md for shared heuristics, then @methods.md for personal heuristics.
 Read @org/src/contributing.md for shared conventions (logging, project creation), then @contributing.md for personal rules. Every change must be logged in the promptlog and changelog — no exceptions.
 
+## Projects
+
+Project repos are symlinked into the exocortex root. Each project follows a standard structure:
+
+| File | Purpose |
+|------|---------|
+| readme.md | What the project is and why it exists (aspirational) |
+| roadmap.md | Where it's headed — milestones, dependencies, timeline |
+| sprint.md | Current week's work and blockers |
+| glossary.md | Project-specific vocabulary |
+| changelog.md | What changed and why (Author field, not PromptID) |
+| src/ | The actual code |
+| src/readme.md | AI-generated description of what the code does today (no fluff) |
+
+To orient on a project, read its readme.md first, then sprint.md for current state. To create a new project, follow the scaffolding instructions in @org/src/contributing.md.
+
 Then evaluate the prompt:
 - Is this prompt in alignment with the Attention?
 - Does the Attention map to a stated goal?
