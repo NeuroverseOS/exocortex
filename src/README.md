@@ -32,7 +32,7 @@ Organization-level context (mission, strategy, values, team role files, shared h
 
 ## How setup.sh works
 
-1. Asks where you want your personal exocortex to live (e.g. `~/exocortex`)
+1. Asks where you want your personal exocortex to live
 2. Creates that directory and symlinks `org/` to the org repo (sibling directory)
 3. Reads the org name from `org/src/organization.md`
 4. Prompts for name, role, values, goals, and initial attention focus

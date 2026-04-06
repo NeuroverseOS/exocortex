@@ -73,11 +73,11 @@ else
 fi
 echo ""
 
-# --- Identity ---
+# --- Identity & Role ---
 echo "--- Identity ---"
 echo ""
 read -r -p "What is your name? " name
-read -r -p "What do you do? (e.g. 'engineer at $org_name') " role_desc
+read -r -p "What is your role/title? (e.g. 'Engineer') " role_title
 read -r -p "What lens or discipline shapes your thinking? (e.g. engineering, design, biology) " lens
 echo ""
 read -r -p "What is your most important guiding value? " value1
@@ -92,7 +92,7 @@ If you have a public bio, paste it here.
 
 ## Identity
 
-I am ${name}, ${role_desc}. I see the world through the lens of ${lens}.
+I am ${name}, ${role_title} at ${org_name}. I see the world through the lens of ${lens}.
 
 ## Skills
 
@@ -107,12 +107,6 @@ EOF
 
 echo "  ✓ identity.md created"
 echo ""
-
-# --- Role ---
-echo "--- Role ---"
-echo ""
-echo "  Organization: $org_name"
-read -r -p "What is your role/title? " role_title
 
 cat > "$exo_path/role.md" << EOF
 What is your role? State your title and what your organization does, so your role has context.

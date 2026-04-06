@@ -1,6 +1,7 @@
 | Timestamp | Change | Justification | Author |
 |-----------|--------|---------------|--------|
-| Apr 5 HKT, 2026 | Symlinks `org/` to the sibling org repo. Removed organization.md from this repo (lives in org repo). Updated src/README.md with new flow and org repo dependency. | Tracy |
+| Apr 6 HKT, 2026 | Combined redundant "What do you do?" and "What is your role/title?" prompts in setup.sh into a single question. Role title is asked once and used in both identity.md and role.md. | The two prompts produced nearly identical sentences. | Tracy |
+| Apr 5 HKT, 2026 | Symlinks `org/` to the sibling org repo. Removed organization.md from this repo (lives in org repo). Updated src/README.md with new flow and org repo dependency. | It was looking in the wrong place before. | Tracy |
 | Apr 5 HKT, 2026 | Removed personal content from template contributing.md — Red/Green Calendar, Diary, and owner-specific references. Template now only has universal conventions (promptlog, changelog). | Personal habits and tracking belong in individual exocortices, not the shared template. | Nils |
 | Apr 5 HKT, 2026 | Rewrote setup.sh — script now creates a personal exocortex in a user-chosen directory instead of modifying the template in place. Copies template files, symlinks org/ back to the org repo, optionally inits git. Added src/organization.md blank template. Updated src/README.md to match new setup flow. | Setup script was modifying the shared template repo directly. New version keeps the template clean and creates a separate personal directory. | Nils on behalf of Tracy |
 | Apr 5 HKT, 2026 | Added goals.md as fourth input to task generation in template CLAUDE.md. | Tasks should reflect personal goals, not just project sprints. | Nils |
