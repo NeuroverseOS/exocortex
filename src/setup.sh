@@ -157,12 +157,17 @@ echo ""
 echo "--- Copying templates ---"
 echo ""
 
-for file in CLAUDE.md methods.md glossary.md contributing.md changelog.md promptlog.md; do
+for file in CLAUDE.md AGENTS.md methods.md glossary.md contributing.md changelog.md promptlog.md; do
   if [ -f "$TEMPLATE_DIR/$file" ]; then
     cp "$TEMPLATE_DIR/$file" "$exo_path/$file"
     echo "  ✓ $file"
   fi
 done
+
+if [ -f "$TEMPLATE_REPO/README.md" ]; then
+  cp "$TEMPLATE_REPO/README.md" "$exo_path/README.md"
+  echo "  ✓ README.md"
+fi
 echo ""
 
 # --- Init git ---
