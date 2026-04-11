@@ -1,5 +1,6 @@
 | Timestamp | Change | Justification | Author |
 |-----------|--------|---------------|--------|
+| Apr 11 HKT, 2026 | Root README: added a **Setup** section for non-engineers (GitHub access, step-by-step clone and `bash src/setup.sh`, opening the personal exocortex in Cursor or via an agent, keeping `org` up to date). Included indented copy-paste terminal blocks for `cd`, `git clone` (org + exocortex), and setup. | Onboarding docs should be usable without assuming engineering fluency; clone commands need to copy cleanly from the readme. | Tracy |
 | Apr 8 HKT, 2026 | setup.sh: use `read -e` (with `-r`) on all prompts so Readline is enabled—arrow keys and backspace edit the line instead of inserting escape sequences like `^[[D`. | Interactive setup was hard to edit in the terminal without line editing. | Shuning |
 | Apr 7 HKT, 2026 | setup.sh now copies README.md and AGENTS.md into the personal exocortex. | New exocortices were missing a README and the autonomous agent directives. | Tracy |
 | Apr 7 HKT, 2026 | Added AGENTS.md — directives for autonomous agents (e.g. Hermes, OpenClaw) covering proactive morning attention checks, persistent memory usage, and version control boundaries. Supplements CLAUDE.md with behaviors that passive editors can't perform. | Autonomous agents need different instructions than passive coding assistants. | Tracy |

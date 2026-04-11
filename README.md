@@ -24,6 +24,44 @@ When we get this right, our intercognitive bandwidth increases: our ability to t
 
 ## Current state
 
-The `src/` directory contains the exocortex template — the set of files that any Auki employee can clone to set up their own exocortex. See [src/README.md](src/README.md) for setup instructions.
+The `src/` directory contains the exocortex template — the set of files that any Auki employee can clone to set up their own exocortex. See [src/README.md](src/README.md) for a file-by-file description and how `setup.sh` works.
 
 See [roadmap.md](roadmap.md) for the project roadmap and [sprint.md](sprint.md) for the current week's focus.
+
+## Setup
+
+**You’ll need**
+
+- A **GitHub account** with access to the [aukilabs/org repo](https://github.com/aukilabs/org).
+
+**Steps**
+
+1. **Clone both repositories**  
+   Clone the **[org](https://github.com/aukilabs/org)** repo and this **exocortex** repo into the same parent directory. They must sit next to each other so the setup script can connect them.
+
+   Open your terminal and go to the desired parent directory, for example `aukilabs` (make sure it exists).
+
+       cd aukilabs
+      
+   Then run:
+
+       git clone git@github.com:aukilabs/org.git
+       git clone git@github.com:aukilabs/exocortex.git
+
+2. **Run the setup script**  
+   In your terminal, go into the exocortex project. Then run the setup script. 
+   
+       cd exocortex
+       bash src/setup.sh
+
+   The script is **interactive**. It will ask where to create your personal exocortex (don't choose the same `aukilabs` directory), then ask simple questions: your name, role, what you care about, what you’re working toward, and what you’re focused on today. Your responses will be recorded in the starter files for you.
+
+3. **Open your new exocortex in Cursor or give it to your agent**  
+   When the script finishes, navigate to where you specified your personal exocortex should be and open that folder in Cursor. Over time you’ll edit the markdown files there; the AI reads them at the start of sessions so it stays aligned with you.
+
+   Alternatively, you can give your AI agent access to your exocortex and let it manage it for you.
+
+4. **Keep shared context fresh**  
+   When the org repo is updated, pull the latest changes there (your setup links your exocortex to that repo).
+
+   In the terminal, navigate to the `aukilabs/org` repo and run `git pull`
