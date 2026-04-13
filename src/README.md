@@ -7,7 +7,7 @@ This directory is the exocortex template. When a new colleague runs `git clone` 
 
 | File              | Function                                                                                                                                                   |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAUDE.md`       | Tells the AI agent how to use the exocortex: reading order, alignment checks, behavior rules. This is the entry point — the agent reads this first.        |
+| `AGENTS.md`       | Single entry point for AI agents: session behavior (read order, alignment, tasks, docs). Includes an **Autonomous-only** subsection for background agents — interactive tools follow the rest. |
 | `attention.md`    | Single-line file. The owner writes what they're focused on this session. The agent reads it and nudges them back if they drift. Only the owner edits this. |
 | `user.md`         | Template for the owner's background, skills, perspective, and values. Values live here — not in a separate file.                                           |
 | `user_role.md`    | Template for the owner's responsibilities and routines. The CEO may provide a draft; the owner rewrites it in their own words.                             |
@@ -47,4 +47,4 @@ The setup script never writes to this org repo — your personal files stay in y
 - Git
 - Bash (for setup.sh)
 - A local clone of the [org](https://github.com/aukilabs/org) repo as a sibling directory (e.g. `aukilabs/org` next to `aukilabs/exocortex`)
-- An AI coding tool that reads CLAUDE.md (Claude Code, Cursor, etc.)
+- An AI coding tool that loads `AGENTS.md` (Cursor, Claude Code, Hermes, etc.)

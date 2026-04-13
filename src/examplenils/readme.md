@@ -6,7 +6,7 @@ This is a real, filled-in exocortex. Use it to get a sense of what each file doe
 
 | File | What it does |
 |------|-------------|
-| **claude.md** | Instructions for the AI agent — the reading order and alignment checks it follows every session |
+| **AGENTS.md** | Instructions for the AI agent — reading order, alignment, tasks; includes autonomous-only rules for background agents |
 | **user.md** | Who the owner is, how they see the world, their public bio |
 | **values.md** | Personal guiding values with explanations of what each one means in practice |
 | **organization.md** | The company's mission, context, and cultural values |

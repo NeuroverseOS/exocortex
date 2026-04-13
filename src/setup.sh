@@ -162,7 +162,7 @@ echo ""
 echo "--- Copying templates ---"
 echo ""
 
-for file in CLAUDE.md AGENTS.md methods.md glossary.md contributing.md changelog.md promptlog.md; do
+for file in AGENTS.md methods.md glossary.md contributing.md changelog.md promptlog.md; do
   if [ -f "$TEMPLATE_DIR/$file" ]; then
     cp "$TEMPLATE_DIR/$file" "$exo_path/$file"
     echo "  ✓ $file"
