@@ -7,10 +7,10 @@ This directory is the exocortex template. When a new colleague runs `git clone` 
 
 | File              | Function                                                                                                                                                   |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAUDE.md`       | Tells the AI agent how to use the exocortex: reading order, alignment checks, behavior rules. This is the entry point — the agent reads this first.        |
+| `AGENTS.md`       | Single entry point for AI agents: session behavior (read order, alignment, tasks, docs). Includes an **Autonomous-only** subsection for background agents — interactive tools follow the rest. |
 | `attention.md`    | Single-line file. The owner writes what they're focused on this session. The agent reads it and nudges them back if they drift. Only the owner edits this. |
-| `identity.md`     | Template for the owner's background, skills, perspective, and values. Values live here — not in a separate file.                                           |
-| `role.md`         | Template for the owner's responsibilities and routines. The CEO may provide a draft; the owner rewrites it in their own words.                             |
+| `user.md`         | Template for the owner's background, skills, perspective, and values. Values live here — not in a separate file.                                           |
+| `user_role.md`    | Template for the owner's responsibilities and routines. The CEO may provide a draft; the owner rewrites it in their own words.                             |
 | `goals.md`        | Template for daily habits, weekly routines, responsibilities, and projects.                                                                                |
 | `methods.md`      | Template for personal heuristics and mental models. Extends org-level methods.                                                                             |
 | `glossary.md`     | Template for domain-specific vocabulary.                                                                                                                   |
@@ -18,7 +18,7 @@ This directory is the exocortex template. When a new colleague runs `git clone` 
 | `changelog.md`    | Seed changelog with one example entry. Append-only, latest on top.                                                                                         |
 | `promptlog.md`    | Seed promptlog with one example entry. Append-only, latest on top. Includes relevance scoring against attention.                                           |
 | `setup.sh`        | Interactive setup script. Creates org symlink, asks name, role, values, goals, and first attention focus. Populates template files with answers.            |
-| `examplenils/`    | Filled-in example of identity.md, role.md showing what a populated exocortex looks like.                                                                   |
+| `examplenils/`    | Filled-in example of user.md, user_role.md showing what a populated exocortex looks like.                                                                   |
 
 
 ## The org layer
@@ -61,4 +61,4 @@ The setup script never writes to this org repo — your personal files stay in y
 - Git
 - Bash (for setup.sh)
 - A local clone of the [org](https://github.com/aukilabs/org) repo as a sibling directory (e.g. `aukilabs/org` next to `aukilabs/exocortex`)
-- An AI coding tool that reads CLAUDE.md (Claude Code, Cursor, etc.)
+- An AI coding tool that loads `AGENTS.md` (Cursor, Claude Code, Hermes, etc.)
