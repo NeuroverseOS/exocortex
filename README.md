@@ -32,20 +32,27 @@ See [roadmap.md](roadmap.md) for the project roadmap and [sprint.md](sprint.md) 
 
 **You’ll need**
 
-- A **GitHub account** with access to the [aukilabs/org repo](https://github.com/aukilabs/org).
+- A **GitHub account**.  
+  - **Auki employees:** access to the private [aukilabs/org](https://github.com/aukilabs/org) repo.  
+  - **Public:** clone the public [aukilabs/org-auki](https://github.com/aukilabs/org-auki) repo — it is the public counterpart to `org` (same role in your exocortex; symlinked as `org/` after setup).
 
 **Steps**
 
-1. **Clone both repositories**  
-   Clone the **[org](https://github.com/aukilabs/org)** repo and this **exocortex** repo into the same parent directory. They must sit next to each other so the setup script can connect them.
+1. **Clone repositories**  
+   Clone this **exocortex** repo and **one** org repo next to it (same parent directory).
 
-   Open your terminal and go to the desired parent directory, for example `aukilabs` (make sure it exists).
+   Open your terminal and go to the desired parent directory, for example `aukilabs` (create it if needed).
 
-       cd aukilabs
-      
-   Then run:
+       cd ~/aukilabs
+
+   **Auki employees:**
 
        git clone git@github.com:aukilabs/org.git
+       git clone git@github.com:aukilabs/exocortex.git
+
+   **External contributors:**
+
+       git clone git@github.com:aukilabs/org-auki.git
        git clone git@github.com:aukilabs/exocortex.git
 
 2. **Run the setup script**  
@@ -62,13 +69,13 @@ See [roadmap.md](roadmap.md) for the project roadmap and [sprint.md](sprint.md) 
    Alternatively, you can give your AI agent access to your exocortex and let it manage it for you.
 
 4. **Link your active projects**  
-   Your exocortex is also where your active project work lives. After setup, open [`org/src/projects.md`](https://github.com/aukilabs/org/blob/main/src/projects.md) — the canonical list of Auki project repos. Clone the projects relevant to your work into a sibling directory (next to your `org` clone), then symlink each one into your exocortex root:
+   Your exocortex is also where your active project work lives. After setup, open `org/src/projects.md` inside the org repo you cloned — the canonical list of project repos where applicable. Clone the projects relevant to your work into a sibling directory, then symlink each one into your exocortex root:
 
        ln -s ~/path/to/project-repo ~/my-exocortex/project-name
 
    Every project follows a standard structure (`readme.md`, `roadmap.md`, `src/sprint.md`, etc.) so the agent always knows where to look. To create a new project from scratch, see `org/src/contributing.md` § *Creating a new project*.
 
 5. **Keep shared context fresh**  
-   When the org repo is updated, pull the latest changes there (your setup links your exocortex to that repo).
+   When the org repo is updated, pull the latest changes in the clone you symlinked (your exocortex always sees it as `org/`).
 
-   In the terminal, navigate to the `aukilabs/org` repo and run `git pull`
+   In the terminal, go to that directory — e.g. `org` or `org-auki` next to `exocortex` — and run `git pull`.

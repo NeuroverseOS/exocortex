@@ -7,14 +7,15 @@ set -e
 
 TEMPLATE_REPO="$(cd "$(dirname "$0")/.." && pwd)"
 TEMPLATE_DIR="$TEMPLATE_REPO/src"
-ORG_REPO="$TEMPLATE_REPO/../org"
+ORG_PRIMARY="$TEMPLATE_REPO/../org"
+ORG_PUBLIC="$TEMPLATE_REPO/../org-auki"
 
 echo ""
 echo "=== Exocortex Setup ==="
 echo ""
 echo "This will create your personal exocortex — a new directory"
 echo "with your user profile, role, goals, and focus. It symlinks back"
-echo "to this org repo for shared context."
+echo "to shared org context."
 echo ""
 
 # --- Where to create the personal exocortex ---
@@ -46,13 +47,19 @@ mkdir -p "$exo_path"
 echo "  ✓ Directory ready at $exo_path"
 echo ""
 
-# --- Find the org repo ---
+# --- Find the org repo: sibling ../org (Auki private), else ../org-auki (public), else prompt ---
 echo "--- Organization ---"
 echo ""
 
+ORG_REPO="$ORG_PRIMARY"
 if [ ! -d "$ORG_REPO/src" ]; then
-  echo "  Could not find the org repo at $ORG_REPO."
-  echo "  The org repo should be a sibling directory named 'org'."
+  ORG_REPO="$ORG_PUBLIC"
+fi
+
+if [ ! -d "$ORG_REPO/src" ]; then
+  echo "  Could not find a sibling org repo at:"
+  echo "    $ORG_PRIMARY   (Auki employees: aukilabs/org)"
+  echo "    $ORG_PUBLIC  (open source: aukilabs/org-auki)"
   read -re -p "  Path to org repo (or leave blank to skip): " custom_org
   if [ -n "$custom_org" ]; then
     custom_org="${custom_org/#\~/$HOME}"
