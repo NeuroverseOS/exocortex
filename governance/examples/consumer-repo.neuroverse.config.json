@@ -1,0 +1,3 @@
+{
+  "extends": ["github:NeuroverseOS/exocortex@main:governance/worldmodels"]
+}

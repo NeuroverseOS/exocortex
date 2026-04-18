@@ -408,6 +408,16 @@ Once merged, every Auki employee's exocortex picks up the governance frame on th
 
 For the behavioral dashboard and MCP server: `npm install @neuroverseos/governance` — published at npm, runs on your machine, nothing hosted by us.
 
+## Use these worldmodels in another repo
+
+Any repo in any GitHub org can inherit these worldmodels with a three-line config. Drop `.neuroverse/config.json` at the repo root:
+
+```json
+{ "extends": ["github:NeuroverseOS/exocortex@main:governance/worldmodels"] }
+```
+
+`@neuroverseos/governance` shallow-clones the subpath to `~/.neuroverse/cache/extends/<hash>/` with a 1-hour TTL. `NEUROVERSE_REFRESH=1` forces a refetch; `NEUROVERSE_NO_FETCH=1` stays offline (CI, air-gapped dev). An example config is checked in at `governance/examples/consumer-repo.neuroverse.config.json` — `cp` it into your repo and the two worldmodels above load automatically.
+
 ## Full documentation
 
 - [Radiant for Auki — full README](https://github.com/NeuroverseOS/Neuroverseos-governance/blob/main/src/radiant/examples/auki/README.md)
